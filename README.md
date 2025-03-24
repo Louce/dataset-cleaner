@@ -72,7 +72,11 @@ An interactive data cleaning platform for CSV datasets with intelligent issue de
 
 ## 🌐 Live Demo
 
-To deploy a live demo using Streamlit Cloud:
+Try the CSV Dataset Cleaner without installation: [Live Demo](https://csv-dataset-cleaner-6s8m2uemcdhrxrghybne4k.streamlit.app/)
+
+> **Note:** The live demo is deployed using Python 3.12 for compatibility with Streamlit Cloud, while the development version uses Python 3.13.
+
+To deploy your own live demo using Streamlit Cloud:
 
 1. Fork this repository to your GitHub account
 2. Sign up for [Streamlit Cloud](https://streamlit.io/cloud)
