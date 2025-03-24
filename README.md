@@ -11,7 +11,7 @@
 An interactive data cleaning platform for CSV datasets with intelligent issue detection and automated cleaning solutions. This application allows you to upload any CSV file, automatically identify data quality issues, and clean your data through an intuitive interface.
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/louce/csv-dataset-cleaner/master/sample_data/screenshot.png" alt="CSV Dataset Cleaner Screenshot" width="80%">
+  <img src="https://raw.githubusercontent.com/Louce/csv-dataset-cleaner/master/sample_data/Screenshot.png" alt="CSV Dataset Cleaner Screenshot" width="80%">
 </div>
 
 ## 🚀 Features
@@ -41,7 +41,7 @@ An interactive data cleaning platform for CSV datasets with intelligent issue de
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/csv-dataset-cleaner.git
+   git clone https://github.com/Louce/csv-dataset-cleaner.git
    cd csv-dataset-cleaner
    ```
 
