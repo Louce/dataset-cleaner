@@ -77,7 +77,7 @@ To deploy a live demo using Streamlit Cloud:
    ```
    https://github.com/Louce/csv-dataset-cleaner/blob/master/app.py
    ```
-5. In the advanced settings, set the Python version to 3.9
+5. In the advanced settings, set the Python version to 3.13
 6. Change the requirements file path to:
    ```
    requirements-streamlit.txt

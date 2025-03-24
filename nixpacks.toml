@@ -1,8 +1,0 @@
-[phases.setup]
-aptPkgs = ['python3', 'python3-pip', 'python3-venv']
-
-[phases.install]
-cmds = ['python3 -m venv --copies /opt/venv && . /opt/venv/bin/activate && pip install -r requirements.txt']
-
-[start]
-cmd = 'streamlit run app.py --server.port=$PORT --server.address=0.0.0.0' 
