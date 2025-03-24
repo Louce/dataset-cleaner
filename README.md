@@ -1,111 +1,196 @@
 # CSV Dataset Cleaner
 
-A powerful and user-friendly web application for cleaning and analyzing CSV datasets. Built with Streamlit, this tool provides an intuitive interface for data cleaning, visualization, and export.
+<div align="center">
 
-## Features
+![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
+![Python](https://img.shields.io/badge/python-3.13-blue.svg)
+![License](https://img.shields.io/badge/license-MIT-green.svg)
 
-- 📊 **Interactive Data Visualization**
-  - Histograms for numeric columns
-  - Bar charts for categorical columns
-  - Box plots for outlier detection
-  - Before/After comparisons
+</div>
 
-- 🧹 **Smart Data Cleaning**
-  - Automatic missing value handling
-  - Outlier detection and treatment
-  - Categorical variable standardization
-  - Data consistency checks
-  - Duplicate removal
+An interactive data cleaning platform for CSV datasets with intelligent issue detection and automated cleaning solutions. This application allows you to upload any CSV file, automatically identify data quality issues, and clean your data through an intuitive interface.
 
-- 📈 **Data Analysis**
-  - Statistical summaries
+<div align="center">
+  <img src="https://github.com/yourusername/csv-dataset-cleaner/raw/main/sample_data/screenshot.png" alt="CSV Dataset Cleaner Screenshot" width="80%">
+</div>
+
+## 🚀 Features
+
+- **Dynamic Dataset Handling**: Works with any CSV file structure without hardcoded column references
+- **Intelligent Missing Value Detection & Filling**:
+  - **🧠 Synergy Strategy**: Automatically determines optimal fill methods using KNN imputation for numeric fields and conditional mode for categorical data
+  - **📊 Statistical Methods**: Mean, median, mode for appropriate column types
+  - **🔧 Custom Values**: Intuitive UI for entering custom replacement values
+- **Advanced Outlier Detection & Handling**: 
+  - Multiple detection algorithms (IQR, Z-score)
+  - Flexible treatment options (removal, capping, transformation)
+- **Data Consistency Verification**:
+  - Automatic detection of logical inconsistencies
+  - Powerful validation rules
+- **Interactive Visualization Dashboard**:
+  - Before/after cleaning comparisons
   - Data quality metrics
-  - Column information
-  - Data type analysis
+- **Flexible Export Options**: CSV, Excel, JSON, and Pickle formats
 
-- 💾 **Export Options**
-  - CSV export
-  - Excel export
-  - Custom file naming
+## 📋 Requirements
 
-## Installation
+- Python 3.8+ (fully compatible with Python 3.13)
+- Dependencies listed in `requirements.txt`
+
+## 💻 Installation
 
 1. Clone the repository:
-```bash
-git clone https://github.com/yourusername/csv-dataset-cleaner.git
-cd csv-dataset-cleaner
-```
+   ```bash
+   git clone https://github.com/yourusername/csv-dataset-cleaner.git
+   cd csv-dataset-cleaner
+   ```
 
 2. Create a virtual environment:
-```bash
-python -m venv venv
-```
+   ```bash
+   # Windows
+   python -m venv venv
+   venv\Scripts\activate
 
-3. Activate the virtual environment:
-- Windows:
-```bash
-venv\Scripts\activate
-```
-- Unix/MacOS:
-```bash
-source venv/bin/activate
-```
+   # macOS/Linux
+   python -m venv venv
+   source venv/bin/activate
+   ```
 
-4. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
+3. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-## Usage
+4. Launch the application:
+   ```bash
+   streamlit run app.py
+   ```
 
-1. Start the application:
-```bash
-streamlit run app.py
-```
+## 📊 Usage Workflow
 
-2. Open your web browser and navigate to the URL shown in the terminal (typically http://localhost:8501)
+1. **Upload** your CSV file with optional import settings
+2. **Analyze** your dataset with automated profiling
+3. **Fix Missing Values** with intelligent strategies
+4. **Handle Outliers** with precision
+5. **Check Data Consistency** to identify logical errors
+6. **Review Changes** with interactive visualizations
+7. **Export** your cleaned dataset
 
-3. Upload your CSV file using the file uploader
+## 🧰 Advanced Features
 
-4. Use the navigation sidebar to:
-   - View the original dataset
-   - Clean the data
-   - View data quality reports
-   - Generate statistical summaries
-   - Export the cleaned data
+### Missing Value Handling
 
-## Project Structure
+Our intelligent system offers multiple strategies for handling missing data:
+
+- **Synergy Strategy**: Uses machine learning techniques to determine the best approach:
+  - KNN imputation for numeric columns based on data patterns
+  - Conditional mode imputation for categorical data based on similar rows
+  - Adaptive fallback methods when primary methods aren't applicable
+
+- **Statistical Methods**: 
+  - Mean/median for numeric data
+  - Mode for categorical data
+  - Zero substitution where appropriate
+
+- **Custom Value Replacement**: 
+  - Intuitive interface for entering replacement values
+  - Quick selection options for common replacements
+  - Preview of changes before applying
+
+### Outlier Detection and Treatment
+
+- **Multiple Detection Algorithms**:
+  - IQR (Interquartile Range) method
+  - Z-score method with configurable thresholds
+  
+- **Flexible Treatment Options**:
+  - Remove outliers
+  - Cap at boundaries
+  - Transform values
+
+### Data Consistency Verification
+
+- **Automated Issue Detection**:
+  - Percentage range validation
+  - Date order verification
+  - Duplicate ID detection
+  - Format consistency checking
+
+- **Intelligent Fixing Options**:
+  - Context-aware correction suggestions
+  - Batch fixing of related issues
+
+### Change Tracking and Visualization
+
+- **Comprehensive Change Log**:
+  - Track all transformations
+  - Compare before and after states
+  
+- **Interactive Visualizations**:
+  - Charts showing impact of cleaning operations
+  - Visual data quality assessment
+
+## 🔧 Development
+
+For developers who want to contribute or customize:
+
+1. Install development dependencies:
+   ```bash
+   pip install -r requirements-dev.txt
+   ```
+
+2. Run tests:
+   ```bash
+   pytest
+   ```
+
+3. Check code quality:
+   ```bash
+   flake8 .
+   black .
+   ```
+
+## 📚 Documentation
+
+- [Contributing Guidelines](CONTRIBUTING.md)
+- [Code of Conduct](CODE_OF_CONDUCT.md)
+- [Changelog](CHANGELOG.md)
+- [Security Policy](SECURITY.md)
+
+## 🧪 Python 3.13 Compatibility
+
+This project is fully compatible with Python 3.13. All dependencies have been verified to work with the latest Python version. If you encounter any compatibility issues, please run the included compatibility test scripts:
+
+- Windows: `run_compatibility_test.bat`
+- Linux/macOS: `run_compatibility_test.sh`
+
+## 📂 Project Structure
 
 ```
 csv-dataset-cleaner/
-├── app.py                 # Main Streamlit application
-├── data_cleaning.py       # Data cleaning logic
-├── data_visualization.py  # Visualization functions
-├── utils.py              # Utility functions
-├── requirements.txt      # Project dependencies
-└── README.md            # Project documentation
+├── app.py                    # Main Streamlit application
+├── data_cleaning.py          # Core data cleaning logic
+├── data_visualization.py     # Visualization components
+├── utils.py                  # Utility functions
+├── requirements.txt          # Project dependencies
+├── requirements-dev.txt      # Development dependencies
+├── .github/                  # GitHub templates and workflows
+├── sample_data/              # Sample datasets for testing
+├── CHANGELOG.md              # Version history
+├── CODE_OF_CONDUCT.md        # Community guidelines
+├── CONTRIBUTING.md           # Contribution guidelines
+├── LICENSE                   # MIT license
+├── README.md                 # This file
+└── SECURITY.md               # Security policy
 ```
 
-## Dependencies
-
-- streamlit>=1.32.0
-- pandas>=2.2.1
-- numpy>=1.26.4
-- matplotlib>=3.8.3
-- plotly>=5.19.0
-- openpyxl>=3.1.2
-- scipy>=1.12.0
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## License
+## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Acknowledgments
+## 🙏 Acknowledgments
 
 - Built with [Streamlit](https://streamlit.io/)
 - Data visualization powered by [Plotly](https://plotly.com/)
 - Data processing with [Pandas](https://pandas.pydata.org/)
+- Machine learning components with [scikit-learn](https://scikit-learn.org/)

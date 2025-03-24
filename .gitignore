@@ -24,12 +24,14 @@ wheels/
 venv/
 env/
 ENV/
+.venv/
 
 # IDE
 .idea/
 .vscode/
 *.swp
 *.swo
+.vs/
 
 # Project specific
 *.csv
@@ -37,7 +39,23 @@ ENV/
 *.xls
 attached_assets/
 *.log
+*.bak
+app.py.bak
+fix_indent.py
 
 # OS specific
 .DS_Store
 Thumbs.db 
+
+# Local configuration
+.env
+.env.local
+instance/
+local_settings.py
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover 
