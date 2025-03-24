@@ -13,7 +13,7 @@ Use this section to tell people about which versions of your project are current
 If you discover a security vulnerability within CSV Dataset Cleaner, please follow these steps:
 
 1. **Do not** disclose the vulnerability publicly
-2. Send an email detailing the issue to [your-email@example.com]
+2. Send an email detailing the issue to [rivaldydendy459@gmail.com]
 3. Include as much information as possible, including:
    - Steps to reproduce the vulnerability
    - Potential impact of the vulnerability
