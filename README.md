@@ -58,11 +58,11 @@ An interactive data cleaning platform for CSV datasets with intelligent issue de
 
 3. Install dependencies:
    ```bash
-   # For Python 3.13 (recommended)
-   pip install -r requirements.txt
+   # For local development with Python 3.13 (recommended for local use)
+   pip install -r requirements-py313.txt
    
-   # For Python 3.12 (alternative)
-   pip install -r requirements-py312.txt
+   # For Python 3.12 (primarily for Streamlit Cloud deployment)
+   pip install -r requirements.txt
    ```
 
 4. Launch the application:
@@ -74,7 +74,7 @@ An interactive data cleaning platform for CSV datasets with intelligent issue de
 
 Try the CSV Dataset Cleaner without installation: [Live Demo](https://csv-dataset-cleaner-6s8m2uemcdhrxrghybne4k.streamlit.app/)
 
-> **Note:** The live demo is deployed using Python 3.12 for compatibility with Streamlit Cloud, while the development version uses Python 3.13.
+> **Note:** The live demo is deployed using Python 3.12 for compatibility with Streamlit Cloud. For local development, use Python 3.13 with `requirements-py313.txt` for the full experience.
 
 To deploy your own live demo using Streamlit Cloud:
 
@@ -203,16 +203,20 @@ csv-dataset-cleaner/
 ├── data_cleaning.py          # Core data cleaning logic
 ├── data_visualization.py     # Visualization components
 ├── utils.py                  # Utility functions
-├── requirements.txt          # Project dependencies
+├── requirements.txt          # Python 3.12 dependencies (for Streamlit Cloud)
+├── requirements-py313.txt    # Python 3.13 dependencies (for local development)
 ├── requirements-dev.txt      # Development dependencies
 ├── .github/                  # GitHub templates and workflows
 ├── sample_data/              # Sample datasets for testing
+│   └── Screenshot.png        # Application screenshot
 ├── CHANGELOG.md              # Version history
 ├── CODE_OF_CONDUCT.md        # Community guidelines
 ├── CONTRIBUTING.md           # Contribution guidelines
 ├── LICENSE                   # MIT license
 ├── README.md                 # This file
-└── SECURITY.md               # Security policy
+├── SECURITY.md               # Security policy
+├── run_compatibility_test.bat # Windows compatibility test script
+└── run_compatibility_test.sh # Linux/macOS compatibility test script
 ```
 
 ## 📄 License
