@@ -58,7 +58,11 @@ An interactive data cleaning platform for CSV datasets with intelligent issue de
 
 3. Install dependencies:
    ```bash
+   # For Python 3.13 (recommended)
    pip install -r requirements.txt
+   
+   # For Python 3.12 (alternative)
+   pip install -r requirements-py312.txt
    ```
 
 4. Launch the application:
@@ -78,9 +82,14 @@ To deploy a live demo using Streamlit Cloud:
    https://github.com/Louce/csv-dataset-cleaner/blob/master/app.py
    ```
 5. In the advanced settings, set the Python version to 3.13
+   (If Python 3.13 is not yet supported by Streamlit Cloud, use Python 3.12 instead)
 6. Change the requirements file path to:
    ```
+   # For Python 3.13 (if supported)
    requirements-streamlit.txt
+   
+   # For Python 3.12 (if 3.13 is not supported)
+   requirements-py312.txt
    ```
 7. Deploy and share your application!
 
