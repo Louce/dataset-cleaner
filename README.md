@@ -14,6 +14,15 @@ An interactive data cleaning platform for CSV datasets with intelligent issue de
   <img src="https://raw.githubusercontent.com/Louce/csv-dataset-cleaner/master/sample_data/Screenshot.png" alt="CSV Dataset Cleaner Screenshot" width="80%">
 </div>
 
+<div align="center">
+
+## ✨ [Try the Live Demo!](https://csv-dataset-cleaner-6s8m2uemcdhrxrghybne4k.streamlit.app/) ✨
+No installation required. Clean your data instantly in your browser.
+
+</div>
+
+> **Note:** The live demo is deployed using Python 3.12 for compatibility with Streamlit Cloud. For local development, use Python 3.13 with `requirements-py313.txt` for the full experience.
+
 ## 🚀 Features
 
 - **Dynamic Dataset Handling**: Works with any CSV file structure without hardcoded column references
@@ -74,29 +83,6 @@ An interactive data cleaning platform for CSV datasets with intelligent issue de
 
 Try the CSV Dataset Cleaner without installation: [Live Demo](https://csv-dataset-cleaner-6s8m2uemcdhrxrghybne4k.streamlit.app/)
 
-> **Note:** The live demo is deployed using Python 3.12 for compatibility with Streamlit Cloud. For local development, use Python 3.13 with `requirements-py313.txt` for the full experience.
-
-To deploy your own live demo using Streamlit Cloud:
-
-1. Fork this repository to your GitHub account
-2. Sign up for [Streamlit Cloud](https://streamlit.io/cloud)
-3. Create a new app in Streamlit Cloud
-4. Enter your GitHub repository URL followed by the path to app.py:
-   ```
-   https://github.com/Louce/csv-dataset-cleaner/blob/master/app.py
-   ```
-5. In the advanced settings, set the Python version to 3.13
-   (If Python 3.13 is not yet supported by Streamlit Cloud, use Python 3.12 instead)
-6. Change the requirements file path to:
-   ```
-   # For Python 3.13 (if supported)
-   requirements-streamlit.txt
-   
-   # For Python 3.12 (if 3.13 is not supported)
-   requirements-py312.txt
-   ```
-7. Deploy and share your application!
-
 ## 📊 Usage Workflow
 
 1. **Upload** your CSV file with optional import settings
@@ -106,6 +92,21 @@ To deploy your own live demo using Streamlit Cloud:
 5. **Check Data Consistency** to identify logical errors
 6. **Review Changes** with interactive visualizations
 7. **Export** your cleaned dataset
+
+## 🚀 Deploy Your Own
+
+To deploy your own version using Streamlit Cloud:
+
+1. Fork this repository to your GitHub account
+2. Sign up for [Streamlit Cloud](https://streamlit.io/cloud)
+3. Create a new app in Streamlit Cloud
+4. Enter your GitHub repository URL followed by the path to app.py:
+   ```
+   https://github.com/Louce/csv-dataset-cleaner/blob/master/app.py
+   ```
+5. In the advanced settings, set the Python version to 3.12
+6. Use the default requirements.txt file path
+7. Deploy and share your application!
 
 ## 🧰 Advanced Features
 
