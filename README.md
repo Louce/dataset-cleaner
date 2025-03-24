@@ -66,6 +66,24 @@ An interactive data cleaning platform for CSV datasets with intelligent issue de
    streamlit run app.py
    ```
 
+## 🌐 Live Demo
+
+To deploy a live demo using Streamlit Cloud:
+
+1. Fork this repository to your GitHub account
+2. Sign up for [Streamlit Cloud](https://streamlit.io/cloud)
+3. Create a new app in Streamlit Cloud
+4. Enter your GitHub repository URL followed by the path to app.py:
+   ```
+   https://github.com/Louce/csv-dataset-cleaner/blob/master/app.py
+   ```
+5. In the advanced settings, set the Python version to 3.9
+6. Change the requirements file path to:
+   ```
+   requirements-streamlit.txt
+   ```
+7. Deploy and share your application!
+
 ## 📊 Usage Workflow
 
 1. **Upload** your CSV file with optional import settings
