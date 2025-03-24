@@ -1,0 +1,146 @@
+<h1 id="data-cleaning-report-personalized-learning-dataset">Data
+Cleaning Report: Personalized Learning Dataset</h1>
+<h2 id="overview">Overview</h2>
+<p>This report documents the data cleaning process applied to the
+personalized learning dataset. The cleaning was performed using a
+systematic approach to address various data quality issues and prepare
+the dataset for further analysis.</p>
+<h2 id="data-cleaning-process-summary">Data Cleaning Process
+Summary</h2>
+<p>The dataset was cleaned using a systematic approach that addresses
+several common data quality issues:</p>
+<ol type="1">
+<li><strong>Missing Values Handling</strong>: Missing values in
+numerical columns were filled with median values, while categorical
+columns used mode replacement.</li>
+<li><strong>Standardization of Categorical Variables</strong>: Ensured
+consistency in categorical values like Gender, Education_Level, and
+Learning_Style.</li>
+<li><strong>Outlier Detection and Handling</strong>: Used IQR
+(Interquartile Range) method to identify and cap outliers in numerical
+columns.</li>
+<li><strong>Age-Education Discrepancies</strong>: Fixed inconsistencies
+where age and education level didn’t align logically.</li>
+<li><strong>Data Consistency Checks</strong>: Ensured logical
+consistency across related fields and capped percentage values to be
+within 0-100.</li>
+</ol>
+<h2 id="specific-transformations-applied">Specific Transformations
+Applied</h2>
+<h3 id="missing-values-handling">1. Missing Values Handling</h3>
+<ul>
+<li>Numerical missing values (Age, Time_Spent_on_Videos, etc.) were
+replaced with column medians</li>
+<li>Categorical missing values were replaced with the most common value
+(mode)</li>
+</ul>
+<h3 id="categorical-standardization">2. Categorical Standardization</h3>
+<ul>
+<li>Gender values were standardized to “Male”, “Female”, and
+“Other”</li>
+<li>Education_Level values were mapped to “High School”,
+“Undergraduate”, or “Postgraduate”</li>
+<li>Engagement_Level values were standardized to “Low”, “Medium”, or
+“High”</li>
+<li>Learning_Style values were standardized to “Visual”, “Auditory”,
+“Reading/Writing”, or “Kinesthetic”</li>
+<li>Dropout_Likelihood values were standardized to “Yes” or “No”</li>
+</ul>
+<h3 id="outlier-handling">3. Outlier Handling</h3>
+<ul>
+<li>Outliers were detected using the IQR method (values outside 1.5 ×
+IQR from Q1 and Q3)</li>
+<li>Numerical outliers were capped (winsorized) at the lower and upper
+bounds rather than removed</li>
+</ul>
+<h3 id="age-education-discrepancies">4. Age-Education Discrepancies</h3>
+<ul>
+<li>Fixed cases where students were too young for their listed education
+level</li>
+<li>Applied minimum age thresholds: High School (14), Undergraduate
+(17), Postgraduate (20)</li>
+</ul>
+<h3 id="data-consistency-checks">5. Data Consistency Checks</h3>
+<ul>
+<li>Ensured percentage columns (Quiz_Scores, Assignment_Completion_Rate,
+Final_Exam_Score) were within 0-100</li>
+<li>Fixed logical inconsistencies like positive Quiz_Scores with zero
+Quiz_Attempts</li>
+<li>Removed duplicate Student_ID entries if present</li>
+</ul>
+<h2 id="running-the-application">Running the Application</h2>
+<p>To run the Streamlit application, follow these steps:</p>
+<ol type="1">
+<li><strong>Ensure Required Dependencies Are Installed</strong>
+<ul>
+<li>Python 3.x</li>
+<li>Required Python packages:
+<ul>
+<li>streamlit</li>
+<li>pandas</li>
+<li>numpy</li>
+<li>matplotlib</li>
+<li>plotly</li>
+<li>openpyxl (for Excel export functionality)</li>
+</ul></li>
+</ul></li>
+<li><strong>Run the Application</strong>
+<ul>
+<li>Open a terminal or command prompt</li>
+<li>Navigate to the project directory</li>
+<li>Run the command:
+<code>streamlit run app.py --server.port 5000</code></li>
+<li>The app will start and automatically open in your default web
+browser at http://localhost:5000</li>
+</ul></li>
+<li><strong>Using the Application</strong>
+<ul>
+<li>Navigate to different sections using the sidebar</li>
+<li>In the “Data Cleaning” section, click the “Clean Dataset” button to
+apply all transformations</li>
+<li>View detailed reports and visualizations in other sections after
+cleaning</li>
+<li>Export the cleaned dataset in CSV or Excel format from the “Export
+Data” section</li>
+</ul></li>
+</ol>
+<h2 id="application-features">Application Features</h2>
+<p>The Streamlit application provides the following features:</p>
+<h3 id="original-dataset-view">1. Original Dataset View</h3>
+<ul>
+<li>Displays the raw dataset before any cleaning operations</li>
+<li>Shows column information including data types, missing values, and
+unique value counts</li>
+<li>Provides interactive data visualizations for exploring the original
+data</li>
+</ul>
+<h3 id="data-cleaning">2. Data Cleaning</h3>
+<ul>
+<li>Applies all cleaning operations with a single button click</li>
+<li>Documents each transformation applied to the dataset</li>
+<li>Allows resetting and re-cleaning if desired</li>
+</ul>
+<h3 id="data-quality-report">3. Data Quality Report</h3>
+<ul>
+<li>Compares before and after metrics for key data quality
+indicators</li>
+<li>Shows detailed information about missing values before and after
+cleaning</li>
+<li>Identifies data type changes made during the cleaning process</li>
+</ul>
+<h3 id="statistical-summary">4. Statistical Summary</h3>
+<ul>
+<li>Provides comprehensive statistics for numerical columns</li>
+<li>Shows distributions and visualizations for categorical columns</li>
+<li>Allows interactive exploration of cleaned data distributions</li>
+</ul>
+<h3 id="export-data">5. Export Data</h3>
+<ul>
+<li>Enables exporting the cleaned dataset in CSV or Excel format</li>
+<li>Provides data preview before export</li>
+<li>Creates downloadable files with custom naming</li>
+</ul>
+<p>This personalized learning dataset cleaner provides a comprehensive
+solution for cleaning, analyzing, and maintaining data quality in
+educational datasets. The transformations applied ensure that the data
+is ready for further analysis and modeling.</p>
