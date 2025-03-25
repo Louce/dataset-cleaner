@@ -83,7 +83,7 @@ No installation required. Clean your data instantly in your browser.
 
 ## 🌐 Live Demo
 
-Try the Dataset Cleaner without installation: [Live Demo](https://csv-dataset-cleaner-6s8m2uemcdhrxrghybne4k.streamlit.app/)
+Try the Dataset Cleaner without installation: [Live Demo](https://dataset-cleaner-6s8m2uemcdhrxrghybne4k.streamlit.app/)
 
 ## 📊 Usage Workflow
 
@@ -214,3 +214,35 @@ This project is fully compatible with Python 3.13. All dependencies have been ve
 ## 📂 Project Structure
 
 ```
+dataset-cleaner/
+├── app.py # Main Streamlit application
+├── data_cleaning.py # Core data cleaning logic
+├── data_visualization.py # Visualization components
+├── utils.py # Utility functions
+├── requirements.txt # Python 3.12 dependencies (for Streamlit Cloud)
+├── requirements-py313.txt # Python 3.13 dependencies (for local development)
+├── requirements-dev.txt # Development dependencies
+├── .github/ # GitHub templates and workflows
+├── sample_data/ # Sample datasets for testing
+│ └── Screenshot.png # Application screenshot
+├── CHANGELOG.md # Version history
+├── CODE_OF_CONDUCT.md # Community guidelines
+├── CONTRIBUTING.md # Contribution guidelines
+├── LICENSE # MIT license
+├── README.md # This file
+├── SECURITY.md # Security policy
+├── run_compatibility_test.bat # Windows compatibility test script
+└── run_compatibility_test.sh # Linux/macOS compatibility test script
+```
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- Built with [Streamlit](https://streamlit.io/)
+- Data visualization powered by [Plotly](https://plotly.com/)
+- Data processing with [Pandas](https://pandas.pydata.org/)
+- Machine learning components with [scikit-learn](https://scikit-learn.org/)
+- Excel processing with [openpyxl](https://openpyxl.readthedocs.io/), [xlrd](https://xlrd.readthedocs.io/) and [xlsxwriter](https://xlsxwriter.readthedocs.io/)

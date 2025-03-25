@@ -1317,6 +1317,17 @@ if st.session_state.original_df is not None:
                 st.warning("Sheet name contains invalid characters. They will be replaced.")
                 for c in invalid_chars:
                     sheet_name = sheet_name.replace(c, '_')
+            
+            # Add Excel-specific export options
+            with st.expander("Excel Advanced Options"):
+                freeze_panes = st.checkbox("Freeze header row", value=True, 
+                                          help="Freeze the first row so it remains visible when scrolling")
+                auto_filter = st.checkbox("Add auto-filter to header", value=True,
+                                         help="Add filter dropdown menus to column headers")
+                add_table_style = st.checkbox("Format as Excel table", value=False,
+                                             help="Apply table formatting with alternating row colors")
+                include_stats = st.checkbox("Include statistics sheet", value=False,
+                                           help="Add a second sheet with summary statistics")
         
         # Export button
         if st.button("Export Data"):
@@ -1345,13 +1356,17 @@ if st.session_state.original_df is not None:
                         worksheet = writer.sheets[sheet_name]
                         
                         # Apply Excel-specific formatting
-                        if 'freeze_panes' in locals() and freeze_panes:
+                        freeze_panes = False  # Default value
+                        auto_filter = False   # Default value
+                        add_table_style = False  # Default value
+
+                        if freeze_panes:
                             worksheet.freeze_panes = 'A2'  # Freeze the first row
-                            
-                        if 'auto_filter' in locals() and auto_filter:
+                        
+                        if auto_filter:
                             worksheet.auto_filter.ref = worksheet.dimensions
-                            
-                        if 'add_table_style' in locals() and add_table_style:
+                        
+                        if add_table_style:
                             try:
                                 from openpyxl.worksheet.table import Table, TableStyleInfo
                                 
