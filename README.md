@@ -11,7 +11,7 @@
 An interactive data cleaning platform for CSV and Excel datasets with intelligent issue detection and automated cleaning solutions. This application allows you to upload any CSV or Excel file, automatically identify data quality issues, and clean your data through an intuitive interface.
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/Louce/dataset-cleaner/master/sample_data/Screenshot.png" alt="Dataset Cleaner Screenshot" width="80%">
+  <img src="https://github.com/Louce/csv-dataset-cleaner/blob/master/sample_data/Screenshot.png" alt="Dataset Cleaner Screenshot" width="80%">
 </div>
 
 <div align="center">
