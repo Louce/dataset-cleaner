@@ -215,6 +215,7 @@ This project is fully compatible with Python 3.13. All dependencies have been ve
 
 ```
 dataset-cleaner/
+│
 ├── src/ # Source code directory
 │ ├── init.py # Makes src a proper package
 │ ├── app.py # Main Streamlit application
@@ -223,12 +224,13 @@ dataset-cleaner/
 │ └── utils.py # Utility functions
 │
 ├── assets/ # Static assets
-│ └── screenshots/ # Application screenshots
-│ └── README.md
+│ └── screenshots # Application screenshots
+│ └── README.md # How to use
 │
 ├── scripts/ # Utility scripts
 │ ├── run_compatibility_test.sh # Linux/macOS compatibility test
 │ └── run_compatibility_test.bat # Windows compatibility test
+│
 ├── requirements/ # Separated requirements files
 │ ├── base.txt # Common dependencies
 │ ├── dev.txt # Development dependencies
