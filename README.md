@@ -11,7 +11,7 @@
 An interactive data cleaning platform for CSV and Excel datasets with intelligent issue detection and automated cleaning solutions. This application allows you to upload any CSV or Excel file, automatically identify data quality issues, and clean your data through an intuitive interface.
 
 <div align="center">
-  <img src="https://github.com/Louce/csv-dataset-cleaner/blob/master/sample_data/Screenshot.png" alt="Dataset Cleaner Screenshot" width="80%">
+  <img src="https://github.com/Louce/csv-dataset-cleaner/blob/master/Asset/Screenshot.png" alt="Dataset Cleaner Screenshot" width="80%">
 </div>
 
 <div align="center">
@@ -215,24 +215,34 @@ This project is fully compatible with Python 3.13. All dependencies have been ve
 
 ```
 dataset-cleaner/
-├── app.py # Main Streamlit application
-├── data_cleaning.py # Core data cleaning logic
-├── data_visualization.py # Visualization components
-├── utils.py # Utility functions
-├── requirements.txt # Python 3.12 dependencies (for Streamlit Cloud)
-├── requirements-py313.txt # Python 3.13 dependencies (for local development)
-├── requirements-dev.txt # Development dependencies
+├── src/ # Source code directory
+│ ├── init.py # Makes src a proper package
+│ ├── app.py # Main Streamlit application
+│ ├── data_cleaning.py # Core data cleaning logic
+│ ├── data_visualization.py # Visualization components
+│ └── utils.py # Utility functions
+│
+├── assets/ # Static assets
+│ └── screenshots/ # Application screenshots
+│ └── README.md
+│
+├── scripts/ # Utility scripts
+│ ├── run_compatibility_test.sh # Linux/macOS compatibility test
+│ └── run_compatibility_test.bat # Windows compatibility test
+├── requirements/ # Separated requirements files
+│ ├── base.txt # Common dependencies
+│ ├── dev.txt # Development dependencies
+│ └── py313.txt # Python 3.13 specific dependencies
+│
 ├── .github/ # GitHub templates and workflows
-├── sample_data/ # Sample datasets for testing
-│ └── Screenshot.png # Application screenshot
+├── LICENSE # License file
+├── README.md # Project readme
 ├── CHANGELOG.md # Version history
-├── CODE_OF_CONDUCT.md # Community guidelines
 ├── CONTRIBUTING.md # Contribution guidelines
-├── LICENSE # MIT license
-├── README.md # This file
+├── CODE_OF_CONDUCT.md # Code of conduct
 ├── SECURITY.md # Security policy
-├── run_compatibility_test.bat # Windows compatibility test script
-└── run_compatibility_test.sh # Linux/macOS compatibility test script
+└── .gitignore # Git ignore file
+
 ```
 
 ## 📄 License

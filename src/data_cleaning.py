@@ -10,7 +10,7 @@ from sklearn.ensemble import IsolationForest
 from scipy import stats
 import re
 from collections import defaultdict
-from utils import detect_column_types, is_percentage_column
+from src.utils import detect_column_types, is_percentage_column
 
 logger = logging.getLogger("csv_cleaner")
 

@@ -5,7 +5,7 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from typing import List, Dict, Any, Tuple, Optional, Union
 import logging
-from utils import detect_column_types
+from src.utils import detect_column_types
 
 logger = logging.getLogger("csv_cleaner")
 

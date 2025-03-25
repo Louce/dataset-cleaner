@@ -8,9 +8,9 @@ import json
 from datetime import datetime
 import plotly.express as px
 import plotly.graph_objects as go
-from data_cleaning import DataCleaner
-from data_visualization import DataVisualizer
-from utils import (
+from src.data_cleaning import DataCleaner
+from src.data_visualization import DataVisualizer
+from src.utils import (
     validate_file, detect_csv_dialect, estimate_memory_usage,
     generate_secure_filename, sanitize_string
 )
