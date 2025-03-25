@@ -1,6 +1,30 @@
 # Changelog
 
-All notable changes to the CSV Dataset Cleaner will be documented in this file.
+All notable changes to the Dataset Cleaner will be documented in this file.
+
+## [1.1.0] - 2025-04-15
+
+### Added
+- Excel file support (.xlsx, .xls) for data import
+- Sheet selection for Excel workbooks
+- Excel-specific import settings:
+  - Header row selection
+  - Specific column selection
+  - Formatted value conversion
+- Enhanced Excel export with formatting options:
+  - Custom sheet naming with validation
+  - Header row freezing
+  - Automatic filtering
+  - Excel table formatting with styles
+- Updated application title and UI elements to reflect multi-format support
+- Enhanced file type detection and validation
+- Added xlsxwriter dependency for enhanced Excel export capabilities
+
+### Fixed
+- Issue with duplicate UI elements in Excel sheet selection
+- Improved exception handling for Excel operations
+- Added validation for Excel sheet names and table names
+- Ensured proper closing of Excel writer objects
 
 ## [1.0.0] - 2025-03-24
 

@@ -1,6 +1,6 @@
-# CSV Dataset Cleaner
+# Dataset Cleaner
 # Requirements for Python 3.13 compatibility
-# Last updated: March 2025
+# Last updated: April 2025
 
 streamlit==1.32.0
 pandas==2.2.1
@@ -9,8 +9,10 @@ plotly==5.20.0
 scikit-learn==1.4.1
 matplotlib==3.8.3
 scipy==1.12.0
-openpyxl==3.1.2
-xlrd==2.0.1
+openpyxl==3.1.2  # For .xlsx file support
+xlrd==2.0.1      # For legacy .xls file support
+xlsxwriter==3.1.2  # For enhanced Excel writing capabilities
+pandas-excel-styles==1.0.0  # For advanced Excel styling
 seaborn==0.13.1
 missingno==0.5.2
 statsmodels==0.14.1

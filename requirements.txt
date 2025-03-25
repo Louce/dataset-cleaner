@@ -1,12 +1,22 @@
-# CSV Dataset Cleaner
-# Requirements for Python 3.12 compatibility
-# Last updated: March 2025
+# Base Requirements for Dataset Cleaner
+# For Python 3.12 compatibility (Streamlit Cloud)
+# Last updated: April 2025
 
-streamlit==1.31.0
+streamlit==1.31.0  # Slightly older but more stable for Streamlit Cloud
 pandas==2.1.4
-numpy==1.26.2
-plotly==5.17.0
+numpy==1.26.3
+plotly==5.18.0
 scikit-learn==1.3.2
-matplotlib==3.8.1
+matplotlib==3.8.2
+scipy==1.11.4
+openpyxl==3.1.2  # For .xlsx file support
+xlrd==2.0.1      # For legacy .xls file support
+xlsxwriter==3.1.1  # For enhanced Excel writing capabilities
 seaborn==0.13.0
-openpyxl==3.1.2
+missingno==0.5.2
+statsmodels==0.14.0
+pyarrow==14.0.1
+fastparquet==2023.10.1
+tqdm==4.66.1
+joblib==1.3.2
+watchdog==3.0.0

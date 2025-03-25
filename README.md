@@ -1,17 +1,17 @@
-# CSV Dataset Cleaner
+# Dataset Cleaner
 
 <div align="center">
 
-![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
+![Version](https://img.shields.io/badge/version-1.1.0-blue.svg)
 ![Python](https://img.shields.io/badge/python-3.13-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 
 </div>
 
-An interactive data cleaning platform for CSV datasets with intelligent issue detection and automated cleaning solutions. This application allows you to upload any CSV file, automatically identify data quality issues, and clean your data through an intuitive interface.
+An interactive data cleaning platform for CSV and Excel datasets with intelligent issue detection and automated cleaning solutions. This application allows you to upload any CSV or Excel file, automatically identify data quality issues, and clean your data through an intuitive interface.
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/Louce/csv-dataset-cleaner/master/sample_data/Screenshot.png" alt="CSV Dataset Cleaner Screenshot" width="80%">
+  <img src="https://raw.githubusercontent.com/Louce/dataset-cleaner/master/sample_data/Screenshot.png" alt="Dataset Cleaner Screenshot" width="80%">
 </div>
 
 <div align="center">
@@ -25,7 +25,8 @@ No installation required. Clean your data instantly in your browser.
 
 ## 🚀 Features
 
-- **Dynamic Dataset Handling**: Works with any CSV file structure without hardcoded column references
+- **Multi-format Support**: Import data from CSV and Excel (.xlsx, .xls) files
+- **Dynamic Dataset Handling**: Works with any file structure without hardcoded column references
 - **Intelligent Missing Value Detection & Filling**:
   - **🧠 Synergy Strategy**: Automatically determines optimal fill methods using KNN imputation for numeric fields and conditional mode for categorical data
   - **📊 Statistical Methods**: Mean, median, mode for appropriate column types
@@ -39,19 +40,20 @@ No installation required. Clean your data instantly in your browser.
 - **Interactive Visualization Dashboard**:
   - Before/after cleaning comparisons
   - Data quality metrics
-- **Flexible Export Options**: CSV, Excel, JSON, and Pickle formats
+- **Flexible Export Options**: CSV, Excel, JSON, and Pickle formats with customizable settings
 
 ## 📋 Requirements
 
 - Python 3.8+ (fully compatible with Python 3.13)
 - Dependencies listed in `requirements.txt`
+- Excel support provided by openpyxl (.xlsx), xlrd (.xls) and xlsxwriter (enhanced formatting)
 
 ## 💻 Installation
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/Louce/csv-dataset-cleaner.git
-   cd csv-dataset-cleaner
+   git clone https://github.com/Louce/dataset-cleaner.git
+   cd dataset-cleaner
    ```
 
 2. Create a virtual environment:
@@ -81,17 +83,17 @@ No installation required. Clean your data instantly in your browser.
 
 ## 🌐 Live Demo
 
-Try the CSV Dataset Cleaner without installation: [Live Demo](https://csv-dataset-cleaner-6s8m2uemcdhrxrghybne4k.streamlit.app/)
+Try the Dataset Cleaner without installation: [Live Demo](https://csv-dataset-cleaner-6s8m2uemcdhrxrghybne4k.streamlit.app/)
 
 ## 📊 Usage Workflow
 
-1. **Upload** your CSV file with optional import settings
+1. **Upload** your CSV or Excel file with format-specific import settings
 2. **Analyze** your dataset with automated profiling
 3. **Fix Missing Values** with intelligent strategies
 4. **Handle Outliers** with precision
 5. **Check Data Consistency** to identify logical errors
 6. **Review Changes** with interactive visualizations
-7. **Export** your cleaned dataset
+7. **Export** your cleaned dataset in your preferred format
 
 ## 🚀 Deploy Your Own
 
@@ -102,13 +104,26 @@ To deploy your own version using Streamlit Cloud:
 3. Create a new app in Streamlit Cloud
 4. Enter your GitHub repository URL followed by the path to app.py:
    ```
-   https://github.com/Louce/csv-dataset-cleaner/blob/master/app.py
+   https://github.com/Louce/dataset-cleaner/blob/master/app.py
    ```
 5. In the advanced settings, set the Python version to 3.12
 6. Use the default requirements.txt file path
 7. Deploy and share your application!
 
 ## 🧰 Advanced Features
+
+### Excel-Specific Features
+
+- **Multi-sheet Support**: Select which sheet to import from Excel workbooks
+- **Advanced Import Options**: 
+  - Choose header row location
+  - Select specific columns to import
+  - Convert formatted values to their display format
+- **Enhanced Export Options**:
+  - Custom sheet naming
+  - Header row freezing
+  - Automatic filtering
+  - Excel table formatting with styles
 
 ### Missing Value Handling
 
@@ -199,34 +214,3 @@ This project is fully compatible with Python 3.13. All dependencies have been ve
 ## 📂 Project Structure
 
 ```
-csv-dataset-cleaner/
-├── app.py                    # Main Streamlit application
-├── data_cleaning.py          # Core data cleaning logic
-├── data_visualization.py     # Visualization components
-├── utils.py                  # Utility functions
-├── requirements.txt          # Python 3.12 dependencies (for Streamlit Cloud)
-├── requirements-py313.txt    # Python 3.13 dependencies (for local development)
-├── requirements-dev.txt      # Development dependencies
-├── .github/                  # GitHub templates and workflows
-├── sample_data/              # Sample datasets for testing
-│   └── Screenshot.png        # Application screenshot
-├── CHANGELOG.md              # Version history
-├── CODE_OF_CONDUCT.md        # Community guidelines
-├── CONTRIBUTING.md           # Contribution guidelines
-├── LICENSE                   # MIT license
-├── README.md                 # This file
-├── SECURITY.md               # Security policy
-├── run_compatibility_test.bat # Windows compatibility test script
-└── run_compatibility_test.sh # Linux/macOS compatibility test script
-```
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- Built with [Streamlit](https://streamlit.io/)
-- Data visualization powered by [Plotly](https://plotly.com/)
-- Data processing with [Pandas](https://pandas.pydata.org/)
-- Machine learning components with [scikit-learn](https://scikit-learn.org/)

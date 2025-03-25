@@ -141,56 +141,63 @@ def detect_outliers(df: pd.DataFrame, column: str, method: str = 'iqr') -> pd.Se
     else:
         raise ValueError("Method must be either 'iqr' or 'zscore'")
 
-def validate_file(file_obj: io.BytesIO) -> Tuple[bool, str]:
+def validate_file(file_buffer, file_type=None):
     """
-    Validate the uploaded file for size, format, and content.
+    Validates uploaded file.
     
     Args:
-        file_obj: The uploaded file object
+        file_buffer: BytesIO object containing file data
+        file_type: Optional string indicating file type ('csv' or 'excel')
         
     Returns:
-        Tuple containing:
-        - Success status (boolean)
-        - Message (success or error message)
+        Tuple of (is_valid: bool, message: str)
     """
-    try:
-        # Check file size
-        file_obj.seek(0, os.SEEK_END)
-        file_size = file_obj.tell() / (1024 * 1024)  # Size in MB
-        file_obj.seek(0)  # Reset file pointer
-        
-        if file_size > MAX_FILE_SIZE_MB:
-            return False, f"File size exceeds the limit of {MAX_FILE_SIZE_MB} MB"
-        
-        # Check if file is empty
-        if file_size == 0:
-            return False, "File is empty"
-        
-        # Try to read the file with different encodings
-        for encoding in SUPPORTED_ENCODINGS:
-            try:
-                # Read a small sample to check format
-                sample = file_obj.read(4096).decode(encoding)
-                file_obj.seek(0)  # Reset file pointer
-                
-                # Check if it looks like a CSV
-                if ',' not in sample and ';' not in sample and '\t' not in sample:
-                    continue  # Try next encoding
-                
-                # Check for at least one header and one data row
-                lines = sample.strip().split('\n')
-                if len(lines) < 2:
-                    return False, "File must contain at least a header row and one data row"
-                
-                return True, "File validation successful"
-            except UnicodeDecodeError:
-                continue  # Try next encoding
-        
-        return False, "Unable to decode file. Please ensure it's a valid CSV with supported encoding"
+    # Check if file is empty
+    file_buffer.seek(0, os.SEEK_END)
+    file_size = file_buffer.tell()
+    file_buffer.seek(0)
     
-    except Exception as e:
-        logger.error(f"File validation error: {str(e)}")
-        return False, f"Error validating file: {str(e)}"
+    if file_size == 0:
+        return False, "Uploaded file is empty"
+    
+    # If file_type not specified, try to infer from content
+    if not file_type:
+        # Read first few bytes to detect file type
+        header = file_buffer.read(8)
+        file_buffer.seek(0)
+        
+        # Excel file signatures
+        xlsx_sig = b'\x50\x4B\x03\x04'  # XLSX files start with PK
+        xls_sig = b'\xD0\xCF\x11\xE0'   # XLS files start with D0CF11E0
+        
+        if header.startswith(xlsx_sig) or header.startswith(xls_sig):
+            file_type = 'excel'
+        else:
+            file_type = 'csv'
+    
+    # Validate based on file type
+    if file_type == 'excel':
+        try:
+            # Try to read as Excel file
+            pd.read_excel(file_buffer, nrows=5)
+            file_buffer.seek(0)
+            return True, "Valid Excel file"
+        except Exception as e:
+            return False, f"Invalid Excel file: {str(e)}"
+    else:
+        try:
+            # Try to read as CSV file (existing validation)
+            file_buffer.seek(0)
+            sample = file_buffer.read(1024).decode('utf-8', errors='ignore')
+            file_buffer.seek(0)
+            
+            # Basic CSV validation - check if it has commas or delimiters
+            if ',' not in sample and ';' not in sample and '\t' not in sample:
+                return False, "File does not appear to be a valid CSV"
+                
+            return True, "Valid CSV file"
+        except Exception as e:
+            return False, f"Invalid CSV file: {str(e)}"
 
 def detect_csv_dialect(file_obj: io.BytesIO) -> Dict:
     """
@@ -417,3 +424,42 @@ def chunk_dataframe(df: pd.DataFrame, chunk_size: int = 10000) -> List[pd.DataFr
     for i in range(0, len(df), chunk_size):
         chunks.append(df.iloc[i:i+chunk_size].copy())
     return chunks
+
+def get_file_type(file_buffer, filename):
+    """
+    Determine file type from extension and content
+    
+    Args:
+        file_buffer: BytesIO object containing file data
+        filename: Original filename with extension
+        
+    Returns:
+        String indicating file type ('csv', 'excel', or 'unknown')
+    """
+    # First check extension
+    if filename.lower().endswith(('.xlsx', '.xls')):
+        return 'excel'
+    elif filename.lower().endswith('.csv'):
+        return 'csv'
+        
+    # If extension is ambiguous, check content signatures
+    header = file_buffer.read(8)
+    file_buffer.seek(0)
+    
+    # Excel file signatures
+    xlsx_sig = b'\x50\x4B\x03\x04'  # XLSX files start with PK
+    xls_sig = b'\xD0\xCF\x11\xE0'   # XLS files start with D0CF11E0
+    
+    if header.startswith(xlsx_sig) or header.startswith(xls_sig):
+        return 'excel'
+    
+    # CSV detection - check if it looks like text with delimiters
+    try:
+        sample = file_buffer.read(1024).decode('utf-8', errors='ignore')
+        file_buffer.seek(0)
+        if ',' in sample or ';' in sample or '\t' in sample:
+            return 'csv'
+    except:
+        pass
+        
+    return 'unknown'

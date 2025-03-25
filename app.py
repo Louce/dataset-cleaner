@@ -17,7 +17,7 @@ from utils import (
 
 # Configure Streamlit page
 st.set_page_config(
-    page_title="CSV Dataset Cleaner",   
+    page_title="Dataset Cleaner",   
     page_icon="🧹",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -58,9 +58,9 @@ def update_progress(message, value=None):
     st.session_state.progress = {"message": message, "value": value}
 
 # Application header
-st.title("CSV Dataset Cleaner 🧹")
+st.title("Dataset Cleaner 🧹")
 st.markdown("""
-This application allows you to upload any CSV file, identify data quality issues, 
+This application allows you to upload CSV or Excel files, identify data quality issues, 
 clean your dataset, and export the cleaned result.
 """)
 
@@ -77,7 +77,7 @@ if st.session_state.success_message:
 with st.sidebar:
     st.header("Data Import")
     
-    uploaded_file = st.file_uploader("Upload CSV File", type=["csv"], help="Upload a CSV file to clean")
+    uploaded_file = st.file_uploader("Upload Data File", type=["csv", "xlsx", "xls"], help="Upload a CSV or Excel file to clean")
     
     if uploaded_file is not None:
         try:
@@ -94,31 +94,70 @@ with st.sidebar:
             
             # Show advanced import settings
             with st.expander("Advanced Import Settings"):
-                delimiter = st.text_input("Delimiter", dialect['delimiter'])
-                quotechar = st.text_input("Quote Character", dialect['quotechar'])
-                encoding = st.selectbox("Encoding", ["utf-8", "latin-1", "iso-8859-1", "cp1252"], index=0)
-                skiprows = st.number_input("Skip Rows", min_value=0, value=0)
+                # Determine if file is Excel
+                is_excel = uploaded_file.name.endswith(('.xlsx', '.xls'))
                 
-                # Option to view raw data sample
-                if st.button("View Raw Data Sample"):
-                    file_buffer.seek(0)
-                    raw_sample = file_buffer.read(5000).decode(encoding)
-                    st.text_area("Raw Data Sample", raw_sample, height=200)
+                if is_excel:
+                    # Excel-specific settings
+                    excel_file = pd.ExcelFile(file_buffer)
+                    sheet_names = excel_file.sheet_names
+                    selected_sheet = st.selectbox("Select Sheet", options=sheet_names, key="sheet_selector_settings")
+                    skiprows = st.number_input("Skip Rows", min_value=0, value=0)
+                    excel_header_row = st.number_input("Header Row", min_value=0, value=0, 
+                                                      help="Row number to use as column names (0-based)")
+                    excel_use_columns = st.text_input("Use Columns (optional)", 
+                                                     help="Comma-separated list of column letters or indices to import (e.g., 'A,C:F')")
+                    convert_formatted = st.checkbox("Convert formatted values", value=True,
+                                                   help="Convert formatted Excel values to their display format")
+                    
+                    # Option to view raw data sample
+                    if st.button("View Data Sample"):
+                        sample_df = pd.read_excel(file_buffer, sheet_name=selected_sheet, nrows=5)
+                        st.dataframe(sample_df)
+                else:
+                    # Existing CSV settings
+                    delimiter = st.text_input("Delimiter", dialect['delimiter'])
+                    quotechar = st.text_input("Quote Character", dialect['quotechar'])
+                    encoding = st.selectbox("Encoding", ["utf-8", "latin-1", "iso-8859-1", "cp1252"], index=0)
+                    skiprows = st.number_input("Skip Rows", min_value=0, value=0)
+                    
+                    # Option to view raw data sample
+                    if st.button("View Raw Data Sample"):
+                        file_buffer.seek(0)
+                        raw_sample = file_buffer.read(5000).decode(encoding)
+                        st.text_area("Raw Data Sample", raw_sample, height=200)
             
             # Import the file
             if st.button("Import Data"):
                 with st.spinner("Importing data..."):
                     try:
-                        # Read CSV with the settings
-                        file_buffer.seek(0)
-                        df = pd.read_csv(
-                            file_buffer,
-                            delimiter=delimiter,
-                            quotechar=quotechar,
-                            encoding=encoding,
-                            skiprows=skiprows,
-                            on_bad_lines='warn'
-                        )
+                        # Check if file is Excel or CSV
+                        if uploaded_file.name.endswith(('.xlsx', '.xls')):
+                            # Handle Excel file
+                            # Read Excel with settings
+                            if convert_formatted:
+                                import openpyxl
+                                wb = openpyxl.load_workbook(file_buffer, data_only=True)
+                                file_buffer.seek(0)
+                            df = pd.read_excel(
+                                file_buffer,
+                                sheet_name=selected_sheet,
+                                skiprows=skiprows,
+                                header=excel_header_row,
+                                # Parse use_columns if provided
+                                usecols=excel_use_columns.split(',') if excel_use_columns else None
+                            )
+                        else:
+                            # Read CSV with the settings
+                            file_buffer.seek(0)
+                            df = pd.read_csv(
+                                file_buffer,
+                                delimiter=delimiter,
+                                quotechar=quotechar,
+                                encoding=encoding,
+                                skiprows=skiprows,
+                                on_bad_lines='warn'
+                            )
                         
                         # Check if dataframe is empty or too large
                         if df.empty:
@@ -1241,7 +1280,7 @@ if st.session_state.original_df is not None:
     elif st.session_state.current_tab == "export":
         st.header("Export Cleaned Data")
         
-        # Export options
+        # Export options - move these outside the export button click handler
         export_format = st.radio(
             "Select export format",
             options=["CSV", "Excel", "JSON", "Pickle"],
@@ -1265,6 +1304,20 @@ if st.session_state.original_df is not None:
         # Index options
         include_index = st.checkbox("Include index in export", value=False)
         
+        # Validate sheet name (Excel has limitations on sheet names)
+        if export_format == "Excel":
+            sheet_name = st.text_input("Sheet Name", value="Cleaned Data")
+            if len(sheet_name) > 31:
+                st.warning("Sheet name is too long. Maximum length is 31 characters.")
+                sheet_name = sheet_name[:31]
+            
+            # Check for invalid characters in sheet name
+            invalid_chars = [':', '\\', '/', '?', '*', '[', ']']
+            if any(c in sheet_name for c in invalid_chars):
+                st.warning("Sheet name contains invalid characters. They will be replaced.")
+                for c in invalid_chars:
+                    sheet_name = sheet_name.replace(c, '_')
+        
         # Export button
         if st.button("Export Data"):
             try:
@@ -1281,8 +1334,45 @@ if st.session_state.original_df is not None:
                         st.session_state.original_df.to_csv(filename, compression=compression, index=include_index)
                 
                 elif export_format == "Excel":
+                    # When exporting
                     filename = f"{base_filename}_cleaned_{timestamp}.xlsx"
-                    st.session_state.original_df.to_excel(filename, index=include_index)
+                    writer = pd.ExcelWriter(filename, engine='openpyxl')
+                    try:
+                        # All Excel writing operations
+                        st.session_state.original_df.to_excel(writer, sheet_name=sheet_name, index=include_index)
+                        
+                        # Add formatting if Excel Advanced Options were selected
+                        worksheet = writer.sheets[sheet_name]
+                        
+                        # Apply Excel-specific formatting
+                        if 'freeze_panes' in locals() and freeze_panes:
+                            worksheet.freeze_panes = 'A2'  # Freeze the first row
+                            
+                        if 'auto_filter' in locals() and auto_filter:
+                            worksheet.auto_filter.ref = worksheet.dimensions
+                            
+                        if 'add_table_style' in locals() and add_table_style:
+                            try:
+                                from openpyxl.worksheet.table import Table, TableStyleInfo
+                                
+                                # Create a table with unique name (avoiding spaces and special chars)
+                                safe_name = sheet_name.replace(' ', '_').replace('-', '_')
+                                table_name = f"Table_{safe_name}_{timestamp}"[:31]  # Excel has 31 char limit for table names
+                                
+                                # Get dimensions of data
+                                data_range = worksheet.dimensions
+                                
+                                # Create table and apply style
+                                tab = Table(displayName=table_name, ref=data_range)
+                                style = TableStyleInfo(name="TableStyleMedium9", showRowStripes=True)
+                                tab.tableStyleInfo = style
+                                
+                                # Add table to worksheet
+                                worksheet.add_table(tab)
+                            except Exception as e:
+                                st.warning(f"Could not apply table style: {str(e)}")
+                    finally:
+                        writer.close()
                 
                 elif export_format == "JSON":
                     if compression == "None":
@@ -1552,5 +1642,5 @@ if st.session_state.original_df is not None:
 
 # Show footer
 st.markdown("---")
-st.markdown("CSV Dataset Cleaner | Created by [Louce (Dendi Rivaldi)](https://github.com/Louce/csv-dataset-cleaner) | Built with Streamlit")
+st.markdown("Dataset Cleaner | Created by [Louce (Dendi Rivaldi)](https://github.com/Louce/dataset-cleaner) | Built with Streamlit")
 
