@@ -11,7 +11,7 @@
 An interactive data cleaning platform for CSV and Excel datasets with intelligent issue detection and automated cleaning solutions. This application allows you to upload any CSV or Excel file, automatically identify data quality issues, and clean your data through an intuitive interface.
 
 <div align="center">
-  <img src="https://github.com/Louce/csv-dataset-cleaner/blob/master/Asset/Screenshot.png" alt="Dataset Cleaner Screenshot" width="80%">
+  <img src="https://github.com/Louce/dataset-cleaner/blob/master/Asset/Screenshot.png" alt="Dataset Cleaner Screenshot" width="80%">
 </div>
 
 <div align="center">
@@ -21,7 +21,7 @@ No installation required. Clean your data instantly in your browser.
 
 </div>
 
-> **Note:** The live demo is deployed using Python 3.12 for compatibility with Streamlit Cloud. For local development, use Python 3.13 with `requirements-py313.txt` for the full experience.
+> **Note:** The live demo is deployed using Python 3.12 for compatibility with Streamlit Cloud. For local development, use Python 3.13 with `requirements/requirements-py313.txt` for the full experience.
 
 ## 🚀 Features
 
@@ -45,7 +45,7 @@ No installation required. Clean your data instantly in your browser.
 ## 📋 Requirements
 
 - Python 3.8+ (fully compatible with Python 3.13)
-- Dependencies listed in `requirements.txt`
+- Dependencies listed in `requirements/requirements.txt`
 - Excel support provided by openpyxl (.xlsx), xlrd (.xls) and xlsxwriter (enhanced formatting)
 
 ## 💻 Installation
@@ -70,15 +70,15 @@ No installation required. Clean your data instantly in your browser.
 3. Install dependencies:
    ```bash
    # For local development with Python 3.13 (recommended for local use)
-   pip install -r requirements-py313.txt
+   pip install -r requirements/requirements-py313.txt
    
    # For Python 3.12 (primarily for Streamlit Cloud deployment)
-   pip install -r requirements.txt
+   pip install -r requirements/requirements.txt
    ```
 
 4. Launch the application:
    ```bash
-   streamlit run app.py
+   streamlit run src/app.py
    ```
 
 ## 🌐 Live Demo
@@ -104,10 +104,10 @@ To deploy your own version using Streamlit Cloud:
 3. Create a new app in Streamlit Cloud
 4. Enter your GitHub repository URL followed by the path to app.py:
    ```
-   https://github.com/Louce/dataset-cleaner/blob/master/app.py
+   https://github.com/Louce/dataset-cleaner/blob/master/src/app.py
    ```
 5. In the advanced settings, set the Python version to 3.12
-6. Use the default requirements.txt file path
+6. Use the default requirements/requirements.txt file path
 7. Deploy and share your application!
 
 ## 🧰 Advanced Features
@@ -183,7 +183,7 @@ For developers who want to contribute or customize:
 
 1. Install development dependencies:
    ```bash
-   pip install -r requirements-dev.txt
+   pip install -r requirements/requirements-dev.txt
    ```
 
 2. Run tests:
@@ -208,8 +208,8 @@ For developers who want to contribute or customize:
 
 This project is fully compatible with Python 3.13. All dependencies have been verified to work with the latest Python version. If you encounter any compatibility issues, please run the included compatibility test scripts:
 
-- Windows: `run_compatibility_test.bat`
-- Linux/macOS: `run_compatibility_test.sh`
+- Windows: `scripts/run_compatibility_test.bat`
+- Linux/macOS: `scripts/run_compatibility_test.sh`
 
 ## 📂 Project Structure
 
