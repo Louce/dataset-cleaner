@@ -1,16 +1,20 @@
+import sys
+import os
+# Add the project root to Python path
+sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
+
 import streamlit as st
 import pandas as pd
 import numpy as np
-import os
 import io
 import time
 import json
 from datetime import datetime
 import plotly.express as px
 import plotly.graph_objects as go
-from src.data_cleaning import DataCleaner
-from src.data_visualization import DataVisualizer
-from src.utils import (
+from data_cleaning import DataCleaner
+from data_visualization import DataVisualizer
+from utils import (
     validate_file, detect_csv_dialect, estimate_memory_usage,
     generate_secure_filename, sanitize_string
 )
