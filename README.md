@@ -67,8 +67,12 @@ No installation required. Clean your data instantly in your browser.
    source venv/bin/activate
    ```
 
-3. Install dependencies:
+3. Install the package in development mode:
    ```bash
+   # Install the package
+   pip install -e .
+
+   # Then install additional requirements
    # For local development with Python 3.13 (recommended for local use)
    pip install -r requirements/requirements-py313.txt
    
@@ -78,6 +82,7 @@ No installation required. Clean your data instantly in your browser.
 
 4. Launch the application:
    ```bash
+   # Run from project root
    streamlit run src/app.py
    ```
 
@@ -213,39 +218,48 @@ This project is fully compatible with Python 3.13. All dependencies have been ve
 
 ## 📂 Project Structure
 
-```
+The project follows a clean, organized structure:
+
+```markdown
 dataset-cleaner/
 │
-├── src/ # Source code directory
-│ ├── init.py # Makes src a proper package
-│ ├── app.py # Main Streamlit application
-│ ├── data_cleaning.py # Core data cleaning logic
-│ ├── data_visualization.py # Visualization components
-│ └── utils.py # Utility functions
+├── src/                          # Source code directory
+│   ├── __init__.py              # Package initialization
+│   ├── app.py                   # Main Streamlit application
+│   ├── data_cleaning.py         # Core data cleaning logic
+│   ├── data_visualization.py    # Visualization components
+│   └── utils.py                 # Utility functions
 │
-├── assets/ # Static assets
-│ └── screenshots # Application screenshots
-│ └── README.md # How to use
+├── Asset/                       # Static assets directory
+│   ├── Screenshot.png          # Application screenshot
+│   └── README.md               # Asset usage documentation
 │
-├── scripts/ # Utility scripts
-│ ├── run_compatibility_test.sh # Linux/macOS compatibility test
-│ └── run_compatibility_test.bat # Windows compatibility test
+├── scripts/                     # Utility scripts
+│   ├── run_compatibility_test.sh  # Linux/macOS compatibility test
+│   └── run_compatibility_test.bat # Windows compatibility test
 │
-├── requirements/ # Separated requirements files
-│ ├── base.txt # Common dependencies
-│ ├── dev.txt # Development dependencies
-│ └── py313.txt # Python 3.13 specific dependencies
+├── requirements/                # Separated requirements files
+│   ├── requirements.txt        # Main dependencies
+│   ├── requirements-dev.txt    # Development dependencies
+│   └── requirements-py313.txt  # Python 3.13 specific dependencies
 │
-├── .github/ # GitHub templates and workflows
-├── LICENSE # License file
-├── README.md # Project readme
-├── CHANGELOG.md # Version history
-├── CONTRIBUTING.md # Contribution guidelines
-├── CODE_OF_CONDUCT.md # Code of conduct
-├── SECURITY.md # Security policy
-└── .gitignore # Git ignore file
-
+├── setup.py                     # Package installation configuration
+├── .github/                     # GitHub templates and workflows
+├── LICENSE                      # MIT License file
+├── README.md                    # Project documentation
+├── CHANGELOG.md                 # Version history
+├── CONTRIBUTING.md              # Contribution guidelines
+├── CODE_OF_CONDUCT.md          # Code of conduct
+├── SECURITY.md                 # Security policy
+└── .gitignore                  # Git ignore file
 ```
+
+Each directory serves a specific purpose:
+- `src/`: Contains all source code and core functionality
+- `Asset/`: Stores static assets like screenshots and documentation
+- `scripts/`: Houses utility scripts for testing and maintenance
+- `requirements/`: Contains different requirement files for various environments
+- Root level files handle project configuration and documentation
 
 ## 📄 License
 
